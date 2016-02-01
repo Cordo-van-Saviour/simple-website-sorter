@@ -1,0 +1,57 @@
+@import "tools/crossroads";
+
+body {
+  background-color: $whitish;
+  font-family: 'Lato', sans-serif;
+}
+
+h1, h2, p {
+  color: $whitish;
+  text-align: center;
+}
+
+.modal-header {
+  padding: 0 15px;
+}
+
+.container {
+  width: 1200px;
+  margin: 0 auto;
+  background-color: #333;
+  clear: both;
+  overflow: hidden;
+  h1 {
+    font-size: 46px;
+    font-weight: 100;
+  }
+  h2 {
+    font-size: 30px;
+    display: block;
+    float: left;
+    margin-top: 15px;
+    font-weight: 100;
+  }
+  button {
+    color: #333;
+    background-color: $whitish;
+    &:hover {
+      background-color: #333;
+      color: $whitish;
+    }
+  }
+}
+
+.col-lg-4 ul {
+  clear: left;
+  li {
+    color: $whitish;
+  }
+}
+
+.modal-body.ng-scope div.col-lg-4 ul li {
+  color: #333;
+}
+
+.modal-body .col-lg-4 {
+  padding-left: 0;
+}

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+  <meta charset="UTF-8">
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700,300' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="app/css/main.css"/>
+  <title>Simple Website sorter</title>
+</head>
+<body ng-app="websiteSorter">
+
+<div class="container" ng-controller="HomeCtrl">
+  <h1>Simple Website Sorter</h1>
+    <hr/>
+  <div class="col-xs-2 btn-group-vertical">
+    <button class="btn btn-default" ng-click="openSite('Add or edit website')">add/delete website</button>
+    <button class="btn btn-default" ng-click="openGroup('Add or edit website')">add/delete group</button>
+  </div>
+
+  <div class="col-lg-4">
+    <h2>Groups ({{ groups.length }})</h2>
+    <ul>
+      <li ng-repeat="group in groups" ng-click="selectGroup(group)">
+        {{ group }}</li>
+    </ul>
+  </div>
+
+  <div class="col-lg-4">
+    <h2>Sites ({{ sites.length }})</h2>
+    <ul>
+      <li ng-repeat="site in sites | filter:filterByGroup">
+        {{ site.name }} -
+        {{ site.color }}
+
+        <a ng-click="deleteSite(site)">delete</a>
+
+      </li>
+    </ul>
+  </div>
+
+  </div>
+
+
+  <footer></footer>
+
+</body>
+
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.9/angular-route.js"></script>
+<script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.13.4.js"></script>
+<script src="/app/js/app.js"></script>
+<script src="/app/js/controllers/HomeCtrl.js"></script>
+<script src="/app/js/controllers/PopupCtrl.js"></script>
+<script src="/app/js/services/websites-service.js"></script>
+</html>
