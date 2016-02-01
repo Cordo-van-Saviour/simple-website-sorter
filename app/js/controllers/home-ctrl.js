@@ -16,7 +16,7 @@ function($scope, $modal) {
   ];
 
   $scope.sites = [];
-  console.log($scope.sites);
+  console.log($scope.groups);
 
   $scope.addGroup = function () {
 
