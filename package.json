@@ -1,0 +1,30 @@
+{
+  "name": "site-sorter",
+  "version": "0.5.0",
+  "description": "Simple website sorter used for a job application",
+  "main": "Gulpfile.js",
+  "dependencies": {
+    "browser-sync": "^2.11.1",
+    "gulp": "^3.9.0",
+    "gulp-sass": "^2.1.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "gulp"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Cordo-van-Saviour/simple-website-sorter.git"
+  },
+  "keywords": [
+    "angular",
+    "javascript",
+    "html5"
+  ],
+  "author": "Radovanovic Uros",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Cordo-van-Saviour/simple-website-sorter/issues"
+  },
+  "homepage": "https://github.com/Cordo-van-Saviour/simple-website-sorter#readme"
+}
