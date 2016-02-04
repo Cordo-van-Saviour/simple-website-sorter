@@ -6516,14 +6516,18 @@ body {
   background-color: #f9f9f9;
   font-family: 'Lato', sans-serif; }
 
-h1, h2, p {
+a {
+  cursor: pointer; }
+
+h1, h2, h4, p {
   color: #f9f9f9;
   text-align: center; }
 
-.modal-header {
-  padding: 0 15px; }
+hr {
+  margin: 0; }
 
 .container {
+  min-height: 700px;
   width: 1200px;
   margin: 0 auto;
   background-color: #333;
@@ -6542,16 +6546,64 @@ h1, h2, p {
     color: #333;
     background-color: #f9f9f9; }
     .container button:hover {
-      background-color: #333;
-      color: #f9f9f9; }
+      background-color: #5cb85c;
+      color: #ffffff; }
+
+button.btn-warning:hover {
+  background-color: orange; }
 
 .col-lg-4 ul {
   clear: left; }
   .col-lg-4 ul li {
     color: #f9f9f9; }
 
-.modal-body.ng-scope div.col-lg-4 ul li {
-  color: #333; }
+.opacity-overlay {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  left: 0;
+  top: 0; }
 
-.modal-body .col-lg-4 {
-  padding-left: 0; }
+.popup-site,
+.popup-group {
+  position: relative;
+  width: 60%;
+  min-height: 200px;
+  margin: auto;
+  background-color: #f9f9f9;
+  border: 2px solid #333333;
+  top: 150px; }
+  .popup-site h3,
+  .popup-group h3 {
+    padding-left: 15px; }
+  .popup-site .col-lg-4 li,
+  .popup-group .col-lg-4 li {
+    color: #333333; }
+  .popup-site h4,
+  .popup-group h4 {
+    color: #333333;
+    text-align: left; }
+
+.popup-body {
+  padding: 0 15px 15px 15px; }
+
+.col-lg-4 h3 {
+  padding: 0; }
+
+.home-display-group .col-lg-4 ul li {
+  cursor: pointer; }
+
+.col-xs-2 {
+  margin-top: 20px; }
+
+.json-render {
+  clear: left;
+  float: left;
+  margin-top: 30px;
+  margin-left: 15px; }
+  .json-render button {
+    width: 165px; }
+    .json-render button:hover {
+      background-color: #5cb85c;
+      color: #ffffff; }

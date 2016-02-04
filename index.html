@@ -6,41 +6,113 @@
   <link rel="stylesheet" href="app/css/main.css"/>
   <title>Simple Website sorter</title>
 </head>
-<body ng-app="websiteSorter">
+<body ng-app="websiteSorter" ng-controller="HomeCtrl">
 
-<div class="container" ng-controller="HomeCtrl">
+<div class="container" ng-cloak>
   <h1>Simple Website Sorter</h1>
-    <hr/>
+  <hr/>
   <div class="col-xs-2 btn-group-vertical">
-    <button class="btn btn-default" ng-click="openSite()">add/delete website</button>
-    <button class="btn btn-default" ng-click="openGroup()">add/delete group</button>
+    <button class="btn btn-default" ng-click="showPopupSite()">add/delete website</button>
+    <button class="btn btn-default" ng-click="showPopupGroup()">add/delete group</button>
   </div>
 
-  <div class="col-lg-4">
-    <h2>Groups ({{ groups.length }})</h2>
-    <ul>
-      <li ng-repeat="group in groups" ng-click="selectGroup(group)">
-        {{ group }}</li>
-    </ul>
+  <div class="home-display-group">
+    <div class="col-lg-4">
+      <h2>Groups ({{ groups.length }})</h2>
+      <ul>
+        <li ng-repeat="group in groups" ng-click="selectGroup(group)">
+          {{ group }}
+          <a ng-click="deleteGroup(group)">delete</a>
+          &#8594;
+        </li>
+      </ul>
+    </div>
   </div>
 
-  <div class="col-lg-4">
-    <h2>Sites ({{ sites.length }})</h2>
-    <ul>
-      <li ng-repeat="site in sites | filter:filterByGroup">
-        {{ site.name }} -
-        {{ site.color }}
+  <div class="home-display-websites">
+    <div class="col-lg-4">
+      <h2>Sites ({{ sites.length }})</h2>
+      <ul>
+        <li ng-repeat="site in sites | filter:filterByGroup" ng-bind-template="{{ site.name }}"
+            ng-style="{ 'color':'{{ site.color }}' }">
 
-        <a ng-click="deleteSite(site)">delete</a>
 
-      </li>
-    </ul>
+          <a ng-click="deleteSite(site)">delete</a>
+        </li>
+      </ul>
+    </div>
+
+    <div class="col-lg-2">
+      <h4>All websites ({{ sites.length }})</h4>
+      <ul>
+        <li ng-repeat="site in sites" ng-bind-template="{{ site.name }}"
+            ng-style="{ 'color':'{{ site.color }}' }">
+
+          <a ng-click="deleteSite(site)">delete</a>
+        </li>
+      </ul>
+    </div>
   </div>
 
+  <div class="opacity-overlay" ng-show="popupShowingSite">
+    <div class="popup-site">
+      <h3>Add site</h3>
+      <div class="modal-body">
+        <form ng-submit="addSite()">
+          <h4>Select website color:</h4>
+          <select ng-model="siteColor">
+            <option ng-repeat="color in colors" value="{{color}}">{{color}}</option>
+          </select>
+          <div class="checkbox" ng-repeat="group in groups">
+            <label>
+              <input type="checkbox"
+                     ng-checked="siteGroups.indexOf(group) > -1"
+                     ng-click="toggleSelection(group)"> {{ group }}
+            </label>
+          </div>
+          <input type="text" ng-model="siteName" placeholder="site name"/>
+          <button class="btn btn-success" type="button" ng-click="addSite()">Save</button>
+          <button class="btn btn-warning" type="button" ng-click="hidePopupSite()">Close</button>
+        </form>
+      </div>
+    </div>
   </div>
 
 
-  <footer></footer>
+  <div class="opacity-overlay" ng-show="popupShowingGroup">
+    <div class="popup-group">
+      <h3>Add group</h3>
+      <div class="col-lg-4">
+        <h4>Group name:</h4>
+        <form ng-submit="addGroup()">
+          <input type="text" ng-model="groupName" placeholder="group name"/>
+        </form>
+      </div>
+
+      <div class="col-lg-4">
+        <h4>Groups ({{ groups.length }})</h4>
+        <ul>
+          <li ng-repeat="group in groups">
+            {{ group }}
+            <a ng-click="deleteGroup(group)">delete</a>
+          </li>
+        </ul>
+      </div>
+      <div class="popup-buttons">
+        <button class="btn btn-success" type="button" ng-click="addGroup()">Save</button>
+        <button class="btn btn-warning" type="button" ng-click="hidePopupGroup()">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="json-render" ng-controller="ChildCtrl">
+    <button class="btn" ng-click="render()">Export JSON {{$scope.sites | json}} </button>
+  </div>
+
+</div>
+
+<footer></footer>
 
 </body>
 

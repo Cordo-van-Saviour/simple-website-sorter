@@ -11,8 +11,8 @@ gulp.task('sass', function () {
 
 gulp.task('default', function () {
   browserSync.init({
-    proxy: "site-sorter.dev"
-    });
+   proxy: "site-sorter.dev"
+   });
 
   gulp.watch('./app/sass/*.scss', ['sass']);
   gulp.watch('./*.html').on('change', browserSync.reload);

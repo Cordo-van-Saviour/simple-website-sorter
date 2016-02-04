@@ -1,113 +1,121 @@
-websiteSorter.controller('HomeCtrl', ['$scope', '$modal',
+websiteSorter.controller('HomeCtrl', ['$scope',
+      function($scope) {
+        $scope.groupName = '';
+        $scope.siteName = '';
+        $scope.siteColor = '';
+        $scope.siteGroups = [];
 
-function($scope, $modal) {
-  $scope.groupName = '';
-  $scope.siteName = '';
-  $scope.siteColor = '';
-  $scope.siteGroups = [];
+        $scope.selectedGroup = '';
+        $scope.groups = [
+          'search engine', 'social', 'news'
+        ];
 
-  $scope.selectedGroup = '';
-  $scope.groups = [
-    'horror', 'action', 'comedy'
-  ];
+        $scope.colors = [
+          'red', 'green', 'blue', 'yellow', 'turquoise'
+        ];
 
-  $scope.colors = [
-    'red', 'green', 'blue', 'yellow', 'turquoise'
-  ];
+        $scope.sites = [];
 
-  $scope.sites = [];
-  console.log($scope.groups);
+        $scope.popupShowingSite = false;
 
-  $scope.addGroup = function () {
+        $scope.showPopupSite = function showPopupSite () {
+          $scope.popupShowingSite = true;
+        };
 
-    $scope.groups.push($scope.groupName)
-    $scope.groupName = ''
+        $scope.hidePopupSite = function hidePopupSite() {
+          $scope.popupShowingSite = false;
+        };
 
-  };
+        $scope.popupShowingGroup = false;
 
-  $scope.addSite = function () {
+        $scope.showPopupGroup = function showPopupGroup () {
+          $scope.popupShowingGroup = true;
+        };
 
-    $scope.sites.push({
-      'id': generateID(),
-      'name': $scope.siteName,
-      'color': $scope.siteColor,
-      'groups': angular.copy($scope.siteGroups)
-    })
-  };
-
-  $scope.toggleSelection = function toggleSelection(group) {
-    var idx = $scope.siteGroups.indexOf(group);
-
-    if (idx > -1) {
-      $scope.siteGroups.splice(idx, 1)
-    }
-    else {
-      $scope.siteGroups.push(group)
-    }
-  };
-
-  $scope.selectGroup = function (group) {
-    $scope.selectedGroup = group;
-    console.log($scope.sites)
-  };
-
-  function generateID() {
-
-    if (typeof $scope.sites.last() == 'undefined') {
-      return 1
-    }
-
-    return parseInt($scope.sites.last().id) + 1
-  }
-
-  Array.prototype.last = function () {
-    return this[this.length - 1]
-  };
-
-  $scope.filterByGroup = function (element) {
-
-    if ($scope.selectedGroup == '') {
-      return true
-    }
-
-    return element.groups.indexOf($scope.selectedGroup) != -1
-
-  };
-
-  $scope.deleteSite = function (site) {
-    var index = $scope.sites.indexOf(site);
-    if (index != -1) {
-      $scope.sites.splice(index, 1)
-    }
-  };
-
-  $scope.deleteGroup = function (group) {
-    var index = $scope.groups.indexOf(group);
-    if (index != -1) {
-      $scope.groups.splice(index, 1)
-    }
-  };
+        $scope.hidePopupGroup = function hidePopupGroup() {
+          $scope.popupShowingGroup = false;
+        };
 
 
-  $scope.openSite = function () {
-    var modalInstance = $modal.open({
-      templateUrl: 'app/popup.html',
-      controller: 'HomeCtrl'
-    });
-  };
-  $scope.openGroup = function () {
-    var modalInstance = $modal.open({
-      templateUrl: 'app/popup-group.html',
-      controller: 'HomeCtrl'
-    });
-  };
+        $scope.addGroup = function () {
 
+          $scope.groups.push($scope.groupName);
+          $scope.groupName = ''
 
+        };
 
-//  $scope.close = function () {
-//    var modalInstance = $modal.close();
-//  };
-}
-]
+        $scope.addSite = function () {
+
+          $scope.sites.push({
+            'id': generateID(),
+            'name': $scope.siteName,
+            'color': $scope.siteColor,
+            'groups': angular.copy($scope.siteGroups)
+          })
+        };
+
+        $scope.toggleSelection = function toggleSelection(group) {
+          var idx = $scope.siteGroups.indexOf(group);
+
+          if (idx > -1) {
+            $scope.siteGroups.splice(idx, 1)
+          }
+          else {
+            $scope.siteGroups.push(group)
+          }
+        };
+
+        $scope.selectGroup = function (group) {
+          $scope.selectedGroup = group;
+          console.log($scope.sites)
+        };
+
+        function generateID() {
+
+          if (typeof $scope.sites.last() == 'undefined') {
+            return 1
+          }
+
+          return parseInt($scope.sites.last().id) + 1
+        }
+
+        Array.prototype.last = function () {
+          return this[this.length - 1]
+        };
+
+        $scope.filterByGroup = function (element) {
+
+          if ($scope.selectedGroup == '') {
+            return true
+          }
+
+          return element.groups.indexOf($scope.selectedGroup) != -1
+
+        };
+
+        $scope.deleteSite = function (site) {
+          var index = $scope.sites.indexOf(site);
+          if (index != -1) {
+            $scope.sites.splice(index, 1)
+          }
+        };
+
+        $scope.deleteGroup = function (group) {
+          var index = $scope.groups.indexOf(group);
+          if (index != -1) {
+            $scope.groups.splice(index, 1)
+          }
+        };
+      }
+    ]
 );
+
+websiteSorter.controller('ChildCtrl', ["$scope",
+  function($scope) {
+   $scope.render = function render() {
+     var exportJSON = JSON.stringify($scope.sites);
+     document.write(exportJSON);
+   }
+  }
+]);
 
