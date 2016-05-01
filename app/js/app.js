@@ -1,3 +1,3 @@
 'use strict';
 
-var websiteSorter = angular.module('websiteSorter', ['ngRoute', 'ui.bootstrap']);
+var websiteSorter = angular.module('websiteSorter', ['ngRoute']);

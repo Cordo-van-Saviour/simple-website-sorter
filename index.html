@@ -12,8 +12,8 @@
   <h1>Simple Website Sorter</h1>
   <hr/>
   <div class="col-xs-2 btn-group-vertical">
-    <button class="btn btn-default" ng-click="showPopupSite()">add/delete website</button>
-    <button class="btn btn-default" ng-click="showPopupGroup()">add/delete group</button>
+    <button class="btn btn-default" ng-click="showPopupSite()">Add Website</button>
+    <button class="btn btn-default" ng-click="showPopupGroup()">Add Group</button>
   </div>
 
   <div class="home-display-group">
@@ -33,11 +33,10 @@
     <div class="col-lg-4">
       <h2>Sites ({{ sites.length }})</h2>
       <ul>
-        <li ng-repeat="site in sites | filter:filterByGroup" ng-bind-template="{{ site.name }}"
-            ng-style="{ 'color':'{{ site.color }}' }">
-
-
+        <li ng-repeat="site in sites | filter:filterByGroup"
+            ng-style="{ 'color':'{{ site.color }}' }"> {{ site.name }}
           <a ng-click="deleteSite(site)">delete</a>
+
         </li>
       </ul>
     </div>
@@ -45,8 +44,8 @@
     <div class="col-lg-2">
       <h4>All websites ({{ sites.length }})</h4>
       <ul>
-        <li ng-repeat="site in sites" ng-bind-template="{{ site.name }}"
-            ng-style="{ 'color':'{{ site.color }}' }">
+        <li ng-repeat="site in sites"
+            ng-style="{ 'color':'{{ site.color }}' }">{{ site.name }}
 
           <a ng-click="deleteSite(site)">delete</a>
         </li>
@@ -89,15 +88,15 @@
         </form>
       </div>
 
-      <div class="col-lg-4">
-        <h4>Groups ({{ groups.length }})</h4>
-        <ul>
-          <li ng-repeat="group in groups">
-            {{ group }}
-            <a ng-click="deleteGroup(group)">delete</a>
-          </li>
-        </ul>
-      </div>
+      <!--<div class="col-lg-4">-->
+        <!--<h4>Groups ({{ groups.length }})</h4>-->
+        <!--<ul>-->
+          <!--<li ng-repeat="group in groups">-->
+            <!--{{ group }}-->
+            <!--<a ng-click="deleteGroup(group)">delete</a>-->
+          <!--</li>-->
+        <!--</ul>-->
+      <!--</div>-->
       <div class="popup-buttons">
         <button class="btn btn-success" type="button" ng-click="addGroup()">Save</button>
         <button class="btn btn-warning" type="button" ng-click="hidePopupGroup()">Cancel</button>
@@ -107,7 +106,8 @@
 
 
   <div class="json-render" ng-controller="ChildCtrl">
-    <button class="btn" ng-click="render()">Export JSON {{$scope.sites | json}} </button>
+    <button ng-click="render()">Export JSON </button>
+    <pre id="showJSON">{{$scope.sites | json}} </pre>
   </div>
 
 </div>

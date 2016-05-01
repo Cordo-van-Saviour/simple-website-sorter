@@ -3,11 +3,11 @@ websiteSorter.controller('HomeCtrl', ['$scope',
         $scope.groupName = '';
         $scope.siteName = '';
         $scope.siteColor = '';
-        $scope.siteGroups = [];
+        $scope.siteGroups = ['all'];
 
         $scope.selectedGroup = '';
         $scope.groups = [
-          'search engine', 'social', 'news'
+          'unsorted', 'search engine', 'social'
         ];
 
         $scope.colors = [
@@ -39,19 +39,32 @@ websiteSorter.controller('HomeCtrl', ['$scope',
 
         $scope.addGroup = function () {
 
-          $scope.groups.push($scope.groupName);
-          $scope.groupName = ''
-
+          if ($scope.groupName != '') {
+            $scope.groups.push($scope.groupName);
+            //alert('Group "' + $scope.groupName + '" saved successfully!');
+            $scope.groupName = '';
+            $scope.popupShowingGroup = false;
+          } else {
+            //alert('You need to add group name!');
+          }
         };
 
         $scope.addSite = function () {
-
-          $scope.sites.push({
-            'id': generateID(),
-            'name': $scope.siteName,
-            'color': $scope.siteColor,
-            'groups': angular.copy($scope.siteGroups)
-          })
+          if ($scope.siteName != '') {
+            if ($scope.siteGroups == 'all') {
+              $scope.siteGroups = ['all', 'unsorted']
+            }
+            $scope.sites.push({
+              'id': generateID(),
+              'name': $scope.siteName,
+              'color': $scope.siteColor,
+              'groups': angular.copy($scope.siteGroups)
+            });
+            //alert('Website "' + $scope.siteName + '" saved successfully!');
+            $scope.popupShowingSite = false;
+          } else {
+            //alert('You need to add website name!');
+          }
         };
 
         $scope.toggleSelection = function toggleSelection(group) {
@@ -113,9 +126,9 @@ websiteSorter.controller('HomeCtrl', ['$scope',
 websiteSorter.controller('ChildCtrl', ["$scope",
   function($scope) {
    $scope.render = function render() {
-     var exportJSON = JSON.stringify($scope.sites);
-     document.write(exportJSON);
-   }
+     //var exportJSON = JSON.stringify($scope.sites);
+     document.getElementById("showJSON").innerHTML = JSON.stringify($scope.sites);
+   };
   }
 ]);
 
